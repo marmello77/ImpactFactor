@@ -31,17 +31,17 @@ For CAPES, a major Brazilian science funding agency, Biodiversity = Ecology + Oc
 
 1. data (folder)
 
-  a. ecology.txt -> processed data from journals classified in JCR's category Ecology.
+    a. ecology.txt -> processed data from journals classified in JCR's category Ecology.
 
-  b. biodiversity.txt -> processed data from journals classified in JCR's categories Ecology, Oceanography, Zoology and Plant Sciences (CAPES's Biodiversity).
+    b. biodiversity.txt -> processed data from journals classified in JCR's categories Ecology, Oceanography, Zoology and Plant Sciences (CAPES's Biodiversity).
  
-  c. jcr ecology 2018.csv -> raw data from journals classified in JCR's category Ecology.
+    c. jcr ecology 2018.csv -> raw data from journals classified in JCR's category Ecology.
   
-  d. jcr oceanography 2018.csv -> raw data from journals classified in CR's category Oceanography.
+    d. jcr oceanography 2018.csv -> raw data from journals classified in CR's category Oceanography.
   
-  e. jcr plant sciences 2018.csv -> raw data from journals classified in CR's category Plant Sciences.
+    e. jcr plant sciences 2018.csv -> raw data from journals classified in CR's category Plant Sciences.
   
-  f. jcr zoology 2018.csv -> raw data from journals classified in CR's category Zoology.
+    f. jcr zoology 2018.csv -> raw data from journals classified in CR's category Zoology.
 
 2. jc.R -> R script to run the analysis and plot the graphs.
 
