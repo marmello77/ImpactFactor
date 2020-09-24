@@ -22,7 +22,7 @@ This is a simple script to run some scientometric analyses.
 For CAPES, a major Brazilian science funding agency, Biodiversity = Ecology + Oceanography + Zoology + Plant Sciences.
 
 
-## Source of data
+## Data source
 
 [Journal Citation Reports](https://jcr.clarivate.com) (aka JCR).
 
@@ -31,21 +31,17 @@ For CAPES, a major Brazilian science funding agency, Biodiversity = Ecology + Oc
 
 1. data (folder)
 
-    a. ecology.txt -> processed data from journals classified in JCR's category Ecology.
-
-    b. biodiversity.txt -> processed data from journals classified in JCR's categories Ecology, Oceanography, Zoology and Plant Sciences (CAPES's Biodiversity).
- 
-    c. jcr ecology 2018.csv -> raw data from journals classified in JCR's category Ecology.
+    a. jcr ecology 2018.csv -> raw data from journals classified in JCR's category Ecology.
   
-    d. jcr oceanography 2018.csv -> raw data from journals classified in CR's category Oceanography.
+    b. jcr oceanography 2018.csv -> raw data from journals classified in JCR's category Oceanography.
   
-    e. jcr plant sciences 2018.csv -> raw data from journals classified in CR's category Plant Sciences.
+    c. jcr plant sciences 2018.csv -> raw data from journals classified in JCR's category Plant Sciences.
   
-    f. jcr zoology 2018.csv -> raw data from journals classified in CR's category Zoology.
+    d. jcr zoology 2018.csv -> raw data from journals classified in JCR's category Zoology.
 
 2. jc.R -> R script to run the analysis and plot the graphs.
 
-3. biodiversity 2018.png -> plot with the distribution of impact factors in JCR's categories Ecology, Oceanography, Zoology and Plant Sciences (CAPES's Biodiversity).
+3. biodiversity 2018.png -> plot with the distribution of impact factors in CAPES's category Biodiversity.
 
 4. ecology 2018.png -> plot with the distribution of impact factors in JCR's category Ecology.
 
