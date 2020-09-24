@@ -1,6 +1,6 @@
 # ImpactFactor
 
-Analysis of the impact factors of journals in the categories "Ecology" (JCR) and "Biodiversity" (CAPES).
+Impact factor analysis of the journals classified as "Ecology" (JCR) and "Biodiversity" (CAPES).
 
 [Ecological Synthesis Lab](https://marcomellolab.wordpress.com) (SintECO).
 
