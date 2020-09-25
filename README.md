@@ -19,14 +19,14 @@ Disclaimer: You may freely use the software provided here for commercial or non-
 
 ## Functionality
 
-This is a simple script to run some scientometric analyses.
+This is a simple script to run a scientometric analysis of journal impact factors. The main focus are ecological journals registered in the Journal Citation Reports (JCR).
 
-For CAPES, a major Brazilian science funding agency, Biodiversity = Ecology + Oceanography + Zoology + Plant Sciences.
+For the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES), a major Brazilian funding agency, Biodiversity = Ecology + Oceanography + Plant Sciences + Zoology.
 
 
 ## Data source
 
-[Journal Citation Reports](https://jcr.clarivate.com) (aka JCR).
+[Journal Citation Reports](https://jcr.clarivate.com).
 
 
 ## List of folders and files
