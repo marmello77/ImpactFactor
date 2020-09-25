@@ -1,6 +1,6 @@
 ---
 title: "Impact Factor"
-author: "Marco Mello"
+author: "Marco A. R. Mello"
 date: "24/09/2020"
 output: pdf_document
 ---
@@ -17,8 +17,6 @@ Impact factor analysis of journals classified in the categories "Ecology" (JCR) 
 
 [Ecological Synthesis Lab](https://marcomellolab.wordpress.com) (SintECO).
 
-Author: Marco A. R. Mello.
-
 See README for further info.
 
 
@@ -29,7 +27,7 @@ See README for further info.
 2. [Biodiversity](#biodiversity)
 
 
-```{r, echo=FALSE, v}
+```{r, echo=FALSE, include=FALSE}
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 ```
@@ -97,7 +95,7 @@ The median impact factor of Ecology journals is `r format(eco.med, scientific=FA
 
 This is the distribution of impact factor for Ecology journals:
 
-```{r, echo=FALSE, fig.height=7, fig.width=10, cache=TRUE, out.width='\\textwidth', fig.align='center'}
+```{r, echo=FALSE, fig.height=7, fig.width=10, cache=FALSE, out.width='\\textwidth', fig.align='center'}
 p1 = ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
   geom_histogram(binwidth=.5, alpha=.3, fill = "blue", position="identity") +
   xlab("Impact factor 2018: JCR's Ecology") + 
@@ -201,7 +199,7 @@ bio.max = round(jcrbio.max[1,1], digits = 2)
 ```
 
 
-The median impact factor of Biodiversity journals is `r format(bio.med, scientific=FALSE)`. Most journals vary between the `r format(bio.qua1, scientific=FALSE)` and `r format(bio.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(bio.min, scientific=FALSE)` and the maximum is `r format(bio.max, scientific=FALSE)`.
+The median impact factor of Biodiversity journals is `r format(bio.med, scientific=FALSE)`. Most journals vary between `r format(bio.qua1, scientific=FALSE)` and `r format(bio.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(bio.min, scientific=FALSE)` and the maximum is `r format(bio.max, scientific=FALSE)`.
 
 
 ```{r, echo=FALSE, include=FALSE}
@@ -225,7 +223,7 @@ These are the median impact factors by category:
 
 This is the distribution of impact factor for Biodiversity journals by discipline:
 
-```{r, echo=FALSE, warning=FALSE, fig.height=7, fig.width=10, cache=TRUE, out.width='\\textwidth', fig.align='center'}
+```{r, echo=FALSE, warning=FALSE, fig.height=7, cache=FALSE, fig.width=10, out.width='\\textwidth', fig.align='center'}
 p2 = ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
   xlab("Impact factor 2018: CAPES's Biodiversity") + 
