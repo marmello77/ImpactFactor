@@ -8,13 +8,10 @@
 
 ############################################################################
 
-#Set the working directory
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
-#Delete all previous objects
 rm(list= ls())
 
-#Load the packages
 library("ggplot2")
 library("plyr")
 library("RColorBrewer")
@@ -28,14 +25,12 @@ library("vegan")
 ###############################################
 
 
-#Import  data
 jcreco = read.csv("data/jcr ecology 2018.csv", na = "Not Available",
                   skip = 1, header = T)
 
 neco<-dim(jcreco)[1]
 jcreco<-jcreco[1:(neco-2),]
 
-#Inspect object
 head(jcreco)
 tail(jcreco)
 colnames(jcreco)
@@ -43,8 +38,6 @@ str(jcreco)
 dim(jcreco)
 sum(is.na(jcreco))
 
-
-#Summarise
 jcreco.med <- summarise(jcreco, 
                         IFmedian = median(Journal.Impact.Factor, na.rm = T))
 jcreco.med
@@ -67,8 +60,6 @@ str(jcreco.qua2)
 eco.qua2 = round(jcreco.qua2[4,1], digits = 2)
 eco.qua2
 
-
-#Plot the histogram of impact factor
 p1 = ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
   geom_histogram(binwidth=.5, alpha=.3, fill = "blue", position="identity") +
   xlab("Impact factor 2018: Ecology") + 
@@ -107,12 +98,9 @@ dev.off()
 ###############################################
 
 
-#Recycle Ecology
 head(jcreco)
 tail(jcreco)
 
-
-#Import data
 jcroce = read.csv("data/jcr oceanography 2018.csv", na = "Not Available",
                   skip = 1, header = T)
 noce<-dim(jcroce)[1]
@@ -128,8 +116,6 @@ jcrzoo = read.csv("data/jcr zoology 2018.csv", na = "Not Available",
 nzoo<-dim(jcrzoo)[1]
 jcrzoo<-jcrzoo[1:(nzoo-2),]
 
-
-#Inspect objects
 head(jcroce)
 tail(jcroce)
 colnames(jcroce)
@@ -151,13 +137,9 @@ str(jcrzoo)
 dim(jcrzoo)
 sum(is.na(jcrzoo))
 
-
-#Merge objects to create Biodiversity
 jcrbio <- rbind(jcreco, jcroce[1:nrow(jcroce),], 
                 jcrpla[1:nrow(jcrpla),], jcrzoo[1:nrow(jcrzoo),])
 
-
-#Inspect object
 head(jcrbio)
 tail(jcrbio)
 dim(jcrbio)
@@ -167,15 +149,11 @@ length(jcrbio$Full.Journal.Title)
 View(jcrbio)
 sum(nrow(jcreco), nrow(jcroce), nrow(jcrpla), nrow(jcrzoo))
 
-
-#Include the categories
 jcrbio$Category <- c(replicate(nrow(jcreco), "Ecology"), 
                      replicate(nrow(jcroce), "Oceanography"), 
                      replicate(nrow(jcrpla), "PlantScience"), 
                      replicate(nrow(jcrzoo), "Zoology"))
 
-
-#Summarise
 jcrbio.med <- ddply(jcrbio, "Category", summarise, 
                     IFmedian = median(Journal.Impact.Factor, na.rm = T))
 jcrbio.med
@@ -185,8 +163,6 @@ oce.med = round(jcrbio.med[2,2], digits = 2)
 pla.med = round(jcrbio.med[3,2], digits = 2)
 zoo.med = round(jcrbio.med[4,2], digits = 2)
 
-
-#Plot the histogram of impact factor
 p2 = ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
   xlab("Impact factor 2018: Biodiversidade Capes") + 
