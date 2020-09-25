@@ -19,9 +19,9 @@ Disclaimer: You may freely use the software provided here for commercial or non-
 
 ## Functionality
 
-This is a simple script to run a scientometric analysis of journal impact factors. The main focus are ecological journals registered in the Journal Citation Reports (JCR).
+You can use this script to run a scientometric analysis of journal impact factors. The main focus are ecological journals monitored by Journal Citation Reports (JCR).
 
-For the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES), a major Brazilian funding agency, Biodiversity = Ecology + Oceanography + Plant Sciences + Zoology.
+The Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES), a major Brazilian funding agency, considers Biodiversity = Ecology + Oceanography + Plant Sciences + Zoology.
 
 
 ## Data source
@@ -33,13 +33,13 @@ For the Brazilian Coordination for the Improvement of Higher Education Personnel
 
 1. data (folder)
 
-    a. jcr ecology 2018.csv -> raw data from journals classified in JCR's category Ecology.
+    a. jcr ecology 2018.csv -> raw bibliometric data from journals classified in JCR's category Ecology.
   
-    b. jcr oceanography 2018.csv -> raw data from journals classified in JCR's category Oceanography.
+    b. jcr oceanography 2018.csv -> raw bibliometric data from journals classified in JCR's category Oceanography.
   
-    c. jcr plant sciences 2018.csv -> raw data from journals classified in JCR's category Plant Sciences.
+    c. jcr plant sciences 2018.csv -> raw bibliometric data from journals classified in JCR's category Plant Sciences.
   
-    d. jcr zoology 2018.csv -> raw data from journals classified in JCR's category Zoology.
+    d. jcr zoology 2018.csv -> raw bibliometric data from journals classified in JCR's category Zoology.
 
 2. jc.R -> R script for analyzing the data and plotting the graphs.
 
