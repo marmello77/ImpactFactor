@@ -136,7 +136,7 @@ p1
 str(jcreco)
 ```
 
-The journals classified in the categories "Oceanography", "Plant Sciences", and "Zoology" on Journal Citation Reports (JCR). Together with "Ecology", they compose the category "Biodiversity" from the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES).
+The journals classified in the categories "Ecology", "Oceanography", "Plant Sciences", and "Zoology" on Journal Citation Reports (JCR) compose the category "Biodiversity" used by the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES).
 
 ```{r, echo=FALSE, include=FALSE}
 jcroce = read.csv("data/jcr oceanography 2018.csv", na = "Not Available",
