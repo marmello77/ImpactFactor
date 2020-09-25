@@ -1,0 +1,9 @@
+base
+ggplot2
+plyr
+RColorBrewer
+reshape2
+tidyr
+permute
+lattice
+vegan

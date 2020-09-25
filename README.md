@@ -41,9 +41,13 @@ For CAPES, a major Brazilian science funding agency, Biodiversity = Ecology + Oc
   
     d. jcr zoology 2018.csv -> raw data from journals classified in JCR's category Zoology.
 
-2. jc.R -> R script to run the analysis and plot the graphs.
+2. jc.R -> R script for analyzing the data and plotting the graphs.
 
-3. biodiversity 2018.png -> plot with the distribution of impact factors in CAPES's category Biodiversity.
+3. ImpactFactor.Rmd -> summary of the results in RMarkDown format.
 
-4. ecology 2018.png -> plot with the distribution of impact factors in JCR's category Ecology.
+4. ImpactFactor.pdf -> summary of the results in PDF format.
+
+5. biodiversity 2018.png -> plot with the distribution of impact factors in CAPES's category Biodiversity.
+
+6. ecology 2018.png -> plot with the distribution of impact factors in JCR's category Ecology.
 
