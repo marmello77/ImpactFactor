@@ -51,7 +51,7 @@ library("vegan")
 
 ## 1. Ecology{#ecology}
 
-Let's examine the impact factor data from the journals classified in the category "Ecology" on Journal Citation Reports (JCR).
+Let's examine the impact factor data of the journals classified in the category "Ecology" on Journal Citation Reports (JCR).
 
 ```{r, echo=FALSE, include=FALSE}
 jcreco = read.csv("data/jcr ecology 2018.csv", na = "Not Available",
@@ -93,7 +93,7 @@ eco.max = round(jcreco.max[1,1], digits = 2)
 The median impact factor of Ecology journals is `r format(eco.med, scientific=FALSE)`. Most journals vary between the `r format(eco.qua1, scientific=FALSE)` and `r format(eco.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(eco.min, scientific=FALSE)` and the maximum is `r format(eco.max, scientific=FALSE)`.
 
 
-This is the distribution of impact factor for Ecology journals:
+This is the distribution of impact factors of Ecology journals:
 
 ```{r, echo=FALSE, fig.height=7, fig.width=10, cache=FALSE, out.width='\\textwidth', fig.align='center'}
 p1 = ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
@@ -221,7 +221,7 @@ These are the median impact factors by category:
 4. Zoology = `r format(zoo.med, scientific=FALSE)`
 
 
-This is the distribution of impact factor for Biodiversity journals by discipline:
+This is the distribution of impact factors of Biodiversity journals by discipline:
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=7, cache=FALSE, fig.width=10, out.width='\\textwidth', fig.align='center'}
 p2 = ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
