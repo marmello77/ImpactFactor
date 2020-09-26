@@ -201,7 +201,7 @@ bio.max = round(jcrbio.max[1,1], digits = 2)
 ```
 
 
-The median impact factor of Biodiversity journals is `r format(bio.med, scientific=FALSE)`. Most journals vary between `r format(bio.qua1, scientific=FALSE)` and `r format(bio.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(bio.min, scientific=FALSE)` and the maximum is `r format(bio.max, scientific=FALSE)`.
+The median impact factor of Biodiversity journals is `r format(bio.med[1,1], scientific=FALSE)`. Most journals vary between `r format(bio.qua1, scientific=FALSE)` and `r format(bio.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(bio.min, scientific=FALSE)` and the maximum is `r format(bio.max, scientific=FALSE)`.
 
 
 ```{r, echo=FALSE, include=FALSE}
