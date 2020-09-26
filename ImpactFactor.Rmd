@@ -2,7 +2,9 @@
 title: "Impact Factor"
 author: "Marco A. R. Mello"
 date: "24/09/2020"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
