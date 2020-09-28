@@ -5,6 +5,7 @@ date: "24/09/2020"
 output:
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -19,7 +20,7 @@ Impact factor analysis of journals classified in the categories "Ecology" (JCR) 
 
 [Ecological Synthesis Lab](https://marcomellolab.wordpress.com) (SintECO).
 
-See README for further info.
+See [README](https://github.com/marmello77/ImpactFactor/blob/master/README.md) for further info.
 
 
 ## Summary
@@ -92,7 +93,7 @@ eco.max = round(jcreco.max[1,1], digits = 2)
 
 ```
 
-The median impact factor of Ecology journals is `r format(eco.med, scientific=FALSE)`. Most journals vary between the `r format(eco.qua1, scientific=FALSE)` and `r format(eco.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(eco.min, scientific=FALSE)` and the maximum is `r format(eco.max, scientific=FALSE)`.
+The median impact factor of Ecology journals is `r format(eco.med, scientific=FALSE)`. Fifty-percent of the journals vary between the `r format(eco.qua1, scientific=FALSE)` and `r format(eco.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(eco.min, scientific=FALSE)` and the maximum is `r format(eco.max, scientific=FALSE)`.
 
 
 This is the distribution of impact factors of Ecology journals:
@@ -201,7 +202,7 @@ bio.max = round(jcrbio.max[1,1], digits = 2)
 ```
 
 
-The median impact factor of Biodiversity journals is `r format(bio.med[1,1], scientific=FALSE)`. Most journals vary between `r format(bio.qua1, scientific=FALSE)` and `r format(bio.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(bio.min, scientific=FALSE)` and the maximum is `r format(bio.max, scientific=FALSE)`.
+The median impact factor of Biodiversity journals is `r format(bio.med[1,1], scientific=FALSE)`. Fifty-percent of the journals vary between `r format(bio.qua1, scientific=FALSE)` and `r format(bio.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(bio.min, scientific=FALSE)` and the maximum is `r format(bio.max, scientific=FALSE)`.
 
 
 ```{r, echo=FALSE, include=FALSE}
