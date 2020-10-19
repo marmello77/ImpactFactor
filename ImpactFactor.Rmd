@@ -91,7 +91,7 @@ eco.max = round(jcreco.max[1,1], digits = 2)
 
 ```
 
-The median impact factor of Ecology journals is `r format(eco.med, scientific=FALSE)`. Fifty-percent of the journals vary between the `r format(eco.qua1, scientific=FALSE)` and `r format(eco.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(eco.min, scientific=FALSE)` and the maximum is `r format(eco.max, scientific=FALSE)`.
+The median impact factor of Ecology journals is `r format(eco.med, scientific=FALSE)`. Fifty-percent of the journals vary between `r format(eco.qua1, scientific=FALSE)` and `r format(eco.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(eco.min, scientific=FALSE)` and the maximum is `r format(eco.max, scientific=FALSE)`.
 
 
 This is the distribution of impact factors of Ecology journals:
