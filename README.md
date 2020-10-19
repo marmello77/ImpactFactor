@@ -61,7 +61,7 @@ Follow the instructions provided in the script "jc.R". Alternatively, follow the
 
 ## Feedback
 
-If you have any questions, suggestions, or corrections, please feel free to open an [issue](https://github.com/marmello77/network-significance/issues) or make a [pull request](https://github.com/marmello77/network-significance/pulls).
+If you have any questions, suggestions, or corrections, please feel free to open an [issue](https://github.com/marmello77/ImpactFactor/issues) or make a [pull request](https://github.com/marmello77/ImpactFactor/pulls).
 
 
 ## Acknowledgments
