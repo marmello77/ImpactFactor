@@ -4,20 +4,20 @@ Impact factor analysis of journals classified in the categories "Ecology" (JCR) 
 
 [Ecological Synthesis Lab](https://marcomellolab.wordpress.com) (SintECO).
 
-Author: Marco A. R. Mello.
+Author: Marco Mello.
 
 E-mail: marmello@usp.br. 
 
-Published on September 24th, 2020 (English version).
+First published on September 24th, 2020 (English version).
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4048903.svg)](https://doi.org/10.5281/zenodo.4048903)
 
 Run in R version 4.0.2 (2020-06-22) -- "Taking Off Again".
 
-Disclaimer: You may freely use the software provided here for commercial or non-commercial purposes at your own risk. We assume no responsibility or liability for the use of this software, convey no license or title under any patent, copyright, or mask work right to the product. We reserve the right to make changes in the software without notification. We also make no representation or warranty that such application will be suitable for the specified use without further testing or modification. If this software helps you produce any academic work (paper, book, chapter, monograph, dissertation, report or similar), please acknowledge the authors and cite the source.
+Disclaimer: You may freely use the software provided here for any purposes at your own risk. We assume no responsibility or liability for the use of this software, convey no license or title under any patent, copyright, or mask work right to the product. We reserve the right to make changes in the software without notification. We also make no representation or warranty that such application will be suitable for the specified use without further testing or modification. If this software helps you produce any academic work (paper, book, chapter, monograph, dissertation, report or similar), please acknowledge the authors and cite the source.
 
 
-## Functionality
+## Functionality and origin
 
 You can use this script to run a scientometric analysis of journal impact factors. The main focus are ecological journals monitored by Journal Citation Reports (JCR).
 
@@ -33,13 +33,19 @@ The Brazilian Coordination for the Improvement of Higher Education Personnel (CA
 
 1. data (folder)
 
-    a. jcr ecology 2018.csv -> raw bibliometric data from journals classified in JCR's category Ecology.
+    a. jcr ecology [year].csv -> raw bibliometric data from journals classified in JCR's category Ecology in the respective year (2018, 2019 etc.).
   
-    b. jcr oceanography 2018.csv -> raw bibliometric data from journals classified in JCR's category Oceanography.
+    b. jcr oceanography [year].csv -> raw bibliometric data from journals classified in JCR's category Oceanography in the respective year (2018, 2019 etc.).
   
-    c. jcr plant sciences 2018.csv -> raw bibliometric data from journals classified in JCR's category Plant Sciences.
+    c. jcr plant sciences [year].csv -> raw bibliometric data from journals classified in JCR's category Plant Sciences in the respective year (2018, 2019 etc.).
   
-    d. jcr zoology 2018.csv -> raw bibliometric data from journals classified in JCR's category Zoology.
+    d. jcr zoology [year].csv -> raw bibliometric data from journals classified in JCR's category Zoology in the respective year (2018, 2019 etc.).
+
+2. figures (folder)
+
+    a. biodiversity [year].png -> plot with the distribution of impact factors in CAPES's category Biodiversity in the respective year (2018, 2019 etc.).
+
+    b. ecology [year].png -> plot with the distribution of impact factors in JCR's category Ecology in the respective year (2018, 2019 etc.).
 
 2. jc.R -> R script for analyzing the data and plotting the graphs.
 
@@ -47,7 +53,17 @@ The Brazilian Coordination for the Improvement of Higher Education Personnel (CA
 
 4. ImpactFactor.pdf -> summary of the results in PDF format.
 
-5. biodiversity 2018.png -> plot with the distribution of impact factors in CAPES's category Biodiversity.
 
-6. ecology 2018.png -> plot with the distribution of impact factors in JCR's category Ecology.
+## Instructions
 
+Follow the instructions provided in the script "jc.R". Alternatively, follow the tutorial provided in "ImpactFactor.Rmd".
+
+
+## Feedback
+
+If you have any questions, suggestions, or corrections, please feel free to open an [issue](https://github.com/marmello77/network-significance/issues) or make a [pull request](https://github.com/marmello77/network-significance/pulls).
+
+
+## Acknowledgments
+
+We thank our labmates and our sponsors, especially the Alexander von Humboldt-Stiftung, CNPq, CAPES, and FAPESP, who gave us grants, fellowships, and scholarships. Last, but not least, we thank the [Stack Overflow Community](https://stackoverflow.com), where we solve most of our coding dilemmas. 

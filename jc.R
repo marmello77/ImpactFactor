@@ -1,31 +1,35 @@
-### Impact factor analysis of the journals classified as "Ecology" (JCR) and "Biodiversity" (CAPES).
+################################################################################
+##### Impact factor analysis of the journals classified as "Ecology" (JCR)
+##### and "Biodiversity" (CAPES).
+##### Ecological Synthesis Lab: https://marcomellolab.wordpress.com.
+##### Author: Marco Mello.
+##### See README for further info:
+##### https://github.com/marmello77/ImpactFactor/blob/master/README.md
+################################################################################
 
-### Ecological Synthesis Lab: https://marcomellolab.wordpress.com.
 
-### Author: Marco A. R. Mello.
+################################################################################
+##### Get ready
+################################################################################
 
-### See README for further info.
-
-############################################################################
 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 rm(list= ls())
 
-library("ggplot2")
-library("plyr")
-library("RColorBrewer")
-library("reshape2")
-library("tidyr")
-library("vegan")
+library(ggplot2)
+library(plyr)
+library(RColorBrewer)
+library(reshape2)
+library(tidyverse)
 
 
-###############################################
+################################################################################
 ##### Ecology
-###############################################
+################################################################################
 
 
-jcreco = read.csv("data/jcr ecology 2018.csv", na = "Not Available",
+jcreco = read.csv("data/jcr ecology 2019.csv", na = "Not Available",
                   skip = 1, header = T)
 
 neco<-dim(jcreco)[1]
@@ -62,7 +66,7 @@ eco.qua2
 
 p1 = ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
   geom_histogram(binwidth=.5, alpha=.3, fill = "blue", position="identity") +
-  xlab("Impact factor 2018: Ecology") + 
+  xlab("Impact factor 2019: Ecology") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,
                                    angle=0,hjust=.5,vjust=.5,face="plain"),
@@ -89,29 +93,32 @@ p1 = ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
                 hjust = -0.1, vjust = 0), size = 3, color = "blue")
 
 p1
-png(filename= "ecology 2018.png", res= 300,  height= 16, width=26, unit="cm")
+png(filename= "figures/ecology 2019.png", 
+    res= 300,  height= 16, 
+    width=26, unit="cm")
+p1
 dev.off()
 
 
-###############################################
+################################################################################
 ##### Biodiversity
-###############################################
+################################################################################
 
 
 head(jcreco)
 tail(jcreco)
 
-jcroce = read.csv("data/jcr oceanography 2018.csv", na = "Not Available",
+jcroce = read.csv("data/jcr oceanography 2019.csv", na = "Not Available",
                   skip = 1, header = T)
 noce<-dim(jcroce)[1]
 jcroce<-jcroce[1:(noce-2),]
 
-jcrpla = read.csv("data/jcr plant sciences 2018.csv", na = "Not Available",
+jcrpla = read.csv("data/jcr plant sciences 2019.csv", na = "Not Available",
                   skip = 1, header = T)
 npla<-dim(jcrpla)[1]
 jcrpla<-jcrpla[1:(npla-2),]
 
-jcrzoo = read.csv("data/jcr zoology 2018.csv", na = "Not Available",
+jcrzoo = read.csv("data/jcr zoology 2019.csv", na = "Not Available",
                   skip = 1, header = T)
 nzoo<-dim(jcrzoo)[1]
 jcrzoo<-jcrzoo[1:(nzoo-2),]
@@ -146,7 +153,6 @@ dim(jcrbio)
 names(jcrbio)
 nrow(jcrbio)
 length(jcrbio$Full.Journal.Title)
-View(jcrbio)
 sum(nrow(jcreco), nrow(jcroce), nrow(jcrpla), nrow(jcrzoo))
 
 jcrbio$Category <- c(replicate(nrow(jcreco), "Ecology"), 
@@ -165,7 +171,7 @@ zoo.med = round(jcrbio.med[4,2], digits = 2)
 
 p2 = ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
-  xlab("Impact factor 2018: Biodiversidade Capes") + 
+  xlab("Impact factor 2019: Biodiversidade Capes") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,angle=0,
                                    hjust=.5,vjust=.5,face="plain"),
@@ -190,5 +196,11 @@ p2 = ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
                 hjust = 0, vjust = 0), size = 3)
 
 p2
-png(filename= "biodiversity 2018.png", res= 300,  height= 16, width=26, unit="cm")
+png(filename= "figures/biodiversity 2019.png", 
+    res= 300,  height= 16,
+    width=26, unit="cm")
+p2
 dev.off()
+
+
+################################### END ########################################

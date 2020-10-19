@@ -1,7 +1,7 @@
 ---
 title: "Impact Factor"
-author: "Marco A. R. Mello"
-date: "24/09/2020"
+author: "Marco Mello"
+date: "19/Oct/2020"
 output:
   html_document:
     df_print: paged
@@ -41,14 +41,12 @@ rm(list= ls())
 
 
 ```{r, echo=FALSE, include=FALSE}
-library("ggplot2")
-library("plyr")
-library("RColorBrewer")
-library("reshape2")
-library("tidyr")
-library("vegan")
+library(ggplot2)
+library(plyr)
+library(RColorBrewer)
+library(reshape2)
+library(tidyverse)
 ```
-
 
 
 
@@ -57,7 +55,7 @@ library("vegan")
 Let's examine the impact factor data of the journals classified in the category "Ecology" on Journal Citation Reports (JCR).
 
 ```{r, echo=FALSE, include=FALSE}
-jcreco = read.csv("data/jcr ecology 2018.csv", na = "Not Available",
+jcreco = read.csv("data/jcr ecology 2019.csv", na = "Not Available",
                   skip = 1, header = T)
 
 neco<-dim(jcreco)[1]
@@ -101,7 +99,7 @@ This is the distribution of impact factors of Ecology journals:
 ```{r, echo=FALSE, fig.height=7, fig.width=10, cache=FALSE, out.width='\\textwidth', fig.align='center'}
 p1 = ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
   geom_histogram(binwidth=.5, alpha=.3, fill = "blue", position="identity") +
-  xlab("Impact factor 2018: JCR's Ecology") + 
+  xlab("Impact factor 2019: JCR's Ecology") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,
                                    angle=0,hjust=.5,vjust=.5,face="plain"),
@@ -140,17 +138,17 @@ str(jcreco)
 The journals classified in the categories "Ecology", "Oceanography", "Plant Sciences", and "Zoology" on Journal Citation Reports (JCR) compose the category "Biodiversity" used by the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES).
 
 ```{r, echo=FALSE, include=FALSE}
-jcroce = read.csv("data/jcr oceanography 2018.csv", na = "Not Available",
+jcroce = read.csv("data/jcr oceanography 2019.csv", na = "Not Available",
                   skip = 1, header = T)
 noce<-dim(jcroce)[1]
 jcroce<-jcroce[1:(noce-2),]
 
-jcrpla = read.csv("data/jcr plant sciences 2018.csv", na = "Not Available",
+jcrpla = read.csv("data/jcr plant sciences 2019.csv", na = "Not Available",
                   skip = 1, header = T)
 npla<-dim(jcrpla)[1]
 jcrpla<-jcrpla[1:(npla-2),]
 
-jcrzoo = read.csv("data/jcr zoology 2018.csv", na = "Not Available",
+jcrzoo = read.csv("data/jcr zoology 2019.csv", na = "Not Available",
                   skip = 1, header = T)
 nzoo<-dim(jcrzoo)[1]
 jcrzoo<-jcrzoo[1:(nzoo-2),]
@@ -229,7 +227,7 @@ This is the distribution of impact factors of Biodiversity journals by disciplin
 ```{r, echo=FALSE, warning=FALSE, fig.height=7, cache=FALSE, fig.width=10, out.width='\\textwidth', fig.align='center'}
 p2 = ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
-  xlab("Impact factor 2018: CAPES's Biodiversity") + 
+  xlab("Impact factor 2019: CAPES's Biodiversity") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,angle=0,
                                    hjust=.5,vjust=.5,face="plain"),
