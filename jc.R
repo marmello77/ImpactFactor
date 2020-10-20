@@ -64,8 +64,8 @@ str(jcreco.qua2)
 eco.qua2 = round(jcreco.qua2[4,1], digits = 2)
 eco.qua2
 
-p1 = ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
-  geom_histogram(binwidth=.5, alpha=.3, fill = "blue", position="identity") +
+p1 <- ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
+  geom_density(color = F, fill = "blue", alpha = 0.3, position = "identity") +
   xlab("Impact factor 2019: Ecology") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,
@@ -81,15 +81,15 @@ p1 = ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
         axis.title.x=element_text(margin=margin(20,0,0,0))) +
   geom_vline(data=jcreco.med, aes(xintercept=eco.med),
              linetype="dashed", size=0.5, color = "blue") +
-  geom_text(aes(eco.med, 26, label = eco.med, angle = 0, 
+  geom_text(aes(eco.med, 0.29, label = eco.med, angle = 0, 
                 hjust = -0.1, vjust = 0), size = 5, color = "blue") +
   geom_vline(data=jcreco.qua1, aes(xintercept=eco.qua1),
              linetype="dashed", size=0.5, color = "blue") +
-  geom_text(aes(eco.qua1, 26, label = eco.qua1, angle = 0, 
+  geom_text(aes(eco.qua1, 0.29, label = eco.qua1, angle = 0, 
                 hjust = -0.1, vjust = 0), size = 3, color = "blue") +
   geom_vline(data=jcreco.qua1, aes(xintercept=eco.qua2),
              linetype="dashed", size=0.5, color = "blue") +
-  geom_text(aes(eco.qua2, 26, label = eco.qua2, angle = 0,
+  geom_text(aes(eco.qua2, 0.29, label = eco.qua2, angle = 0,
                 hjust = -0.1, vjust = 0), size = 3, color = "blue")
 
 p1
@@ -169,7 +169,7 @@ oce.med = round(jcrbio.med[2,2], digits = 2)
 pla.med = round(jcrbio.med[3,2], digits = 2)
 zoo.med = round(jcrbio.med[4,2], digits = 2)
 
-p2 = ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
+p2 <- ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
   xlab("Impact factor 2019: Biodiversidade Capes") + 
   ylab("Frequency") +
