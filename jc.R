@@ -65,7 +65,7 @@ eco.qua2 = round(jcreco.qua2[4,1], digits = 2)
 eco.qua2
 
 p1 <- ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
-  geom_density(color = F, fill = "blue", alpha = 0.3, position = "identity") +
+  geom_density(color = F, fill = "red", alpha = 0.3, position = "identity") +
   xlab("Impact factor 2019: Ecology") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,
@@ -80,17 +80,17 @@ p1 <- ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
   theme(axis.title.y=element_text(margin=margin(0,20,0,0)),
         axis.title.x=element_text(margin=margin(20,0,0,0))) +
   geom_vline(data=jcreco.med, aes(xintercept=eco.med),
-             linetype="dashed", size=0.5, color = "blue") +
+             linetype="dashed", size=0.5, color = "red") +
   geom_text(aes(eco.med, 0.29, label = eco.med, angle = 0, 
-                hjust = -0.1, vjust = 0), size = 5, color = "blue") +
+                hjust = -0.1, vjust = 0), size = 5, color = "red") +
   geom_vline(data=jcreco.qua1, aes(xintercept=eco.qua1),
-             linetype="dashed", size=0.5, color = "blue") +
+             linetype="dashed", size=0.5, color = "red") +
   geom_text(aes(eco.qua1, 0.29, label = eco.qua1, angle = 0, 
-                hjust = -0.1, vjust = 0), size = 3, color = "blue") +
+                hjust = -0.1, vjust = 0), size = 3, color = "red") +
   geom_vline(data=jcreco.qua1, aes(xintercept=eco.qua2),
-             linetype="dashed", size=0.5, color = "blue") +
+             linetype="dashed", size=0.5, color = "red") +
   geom_text(aes(eco.qua2, 0.29, label = eco.qua2, angle = 0,
-                hjust = -0.1, vjust = 0), size = 3, color = "blue")
+                hjust = -0.1, vjust = 0), size = 3, color = "red")
 
 p1
 png(filename= "figures/ecology 2019.png", 
