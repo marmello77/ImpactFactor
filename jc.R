@@ -29,7 +29,7 @@ library(tidyverse)
 ################################################################################
 
 
-# Importação de dados no formato usado até 2020:
+# Data import based on the JCR format used until 2020:
 
 #jcreco = read.csv("data/jcr ecology 2020.csv", na = "Not Available",
 #skip = 1, header = T)
@@ -38,11 +38,11 @@ library(tidyverse)
 #jcreco<-jcreco[,1:(ncol(jcreco)-1)]
 
 
-# OBS: no formato adotado pelo JCR a partir de 2021, é preciso remover a última
-# coluna vazia que vem no CSV. Isso pode ser feito manualmente ou através dos
-# novos códigos abaixo.
+# Since 2021, JCR changed the raw data to a much messier format. The data are
+# downloaded with an extra empty column in the end. You can either remove it 
+# manually or using the updated methods below. I prefer Method 2.
 
-# Método 1
+# Method 1
 #fl <- "data/jcr ecology 2020.csv"
 #txt <- readLines(fl)
 #txt <- txt[-1]
@@ -52,7 +52,7 @@ library(tidyverse)
 #close(con)
 #head(df1)
 
-#Método 2
+# Method 2
 
 jcreco <- read.table("data/jcr ecology 2020.csv", sep=",", 
                  skip=2, fill=T, header=T, row.names=NULL,
