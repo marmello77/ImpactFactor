@@ -29,11 +29,38 @@ library(tidyverse)
 ################################################################################
 
 
-jcreco = read.csv("data/jcr ecology 2019.csv", na = "Not Available",
-                  skip = 1, header = T)
+# Importação de dados no formato usado até 2020:
 
-neco<-dim(jcreco)[1]
-jcreco<-jcreco[1:(neco-2),]
+#jcreco = read.csv("data/jcr ecology 2020.csv", na = "Not Available",
+#skip = 1, header = T)
+#neco<-dim(jcreco)[1]
+#jcreco<-jcreco[1:(neco-2),]
+#jcreco<-jcreco[,1:(ncol(jcreco)-1)]
+
+
+# OBS: no formato adotado pelo JCR a partir de 2021, é preciso remover a última
+# coluna vazia que vem no CSV. Isso pode ser feito manualmente ou através dos
+# novos códigos abaixo.
+
+# Método 1
+#fl <- "data/jcr ecology 2020.csv"
+#txt <- readLines(fl)
+#txt <- txt[-1]
+#txt <- sub(",$", "", txt)
+#con <- textConnection(txt)
+#df1 <- read.csv(con)
+#close(con)
+#head(df1)
+
+#Método 2
+
+jcreco <- read.table("data/jcr ecology 2020.csv", sep=",", 
+                 skip=2, fill=T, header=T, row.names=NULL,
+                 na.strings = "n/a")
+names(jcreco)[-ncol(jcreco)] <- names(jcreco)[-1]
+jcreco <- jcreco[,-ncol(jcreco)]
+jcreco <- jcreco[1:(nrow(jcreco)-2),]
+jcreco$Total.Citations <- as.integer(gsub(",", "", jcreco$Total.Citations))
 
 head(jcreco)
 tail(jcreco)
@@ -43,13 +70,13 @@ dim(jcreco)
 sum(is.na(jcreco))
 
 jcreco.med <- summarise(jcreco, 
-                        IFmedian = median(Journal.Impact.Factor, na.rm = T))
+                        IFmedian = median(X2020.JIF, na.rm = T))
 jcreco.med
 eco.med = round(jcreco.med[1,1], digits = 2)
 eco.med
 
 jcreco.qua1 <- summarise(jcreco, 
-                         IFqua1 = quantile(Journal.Impact.Factor, na.rm = T))
+                         IFqua1 = quantile(X2020.JIF, na.rm = T))
 class(jcreco.qua1)
 head(jcreco.qua1)
 str(jcreco.qua1)
@@ -57,16 +84,16 @@ eco.qua1 = round(jcreco.qua1[2,1], digits = 2)
 eco.qua1
 
 jcreco.qua2 <- summarise(jcreco, 
-                         IFqua2 = quantile(Journal.Impact.Factor, na.rm = T))
+                         IFqua2 = quantile(X2020.JIF, na.rm = T))
 class(jcreco.qua2)
 head(jcreco.qua2)
 str(jcreco.qua2)
 eco.qua2 = round(jcreco.qua2[4,1], digits = 2)
 eco.qua2
 
-p1 <- ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
+p1 <- ggplot(jcreco, aes(x=X2020.JIF)) +
   geom_density(color = F, fill = "red", alpha = 0.3, position = "identity") +
-  xlab("Impact factor 2019: Ecology") + 
+  xlab("Impact factor 2020: Ecology") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,
                                    angle=0,hjust=.5,vjust=.5,face="plain"),
@@ -93,7 +120,7 @@ p1 <- ggplot(jcreco, aes(x=Journal.Impact.Factor)) +
                 hjust = -0.1, vjust = 0), size = 3, color = "red")
 
 p1
-png(filename= "figures/ecology 2019.png", 
+png(filename= "figures/ecology 2020.png", 
     res= 300,  height= 16, 
     width=26, unit="cm")
 p1
@@ -105,23 +132,32 @@ dev.off()
 ################################################################################
 
 
-head(jcreco)
-tail(jcreco)
+jcroce <- read.table("data/jcr oceanography 2020.csv", sep=",", 
+                     skip=2, fill=T, header=T, row.names=NULL,
+                     na.strings = "n/a")
+names(jcroce)[-ncol(jcroce)] <- names(jcroce)[-1]
+jcroce <- jcroce[,-ncol(jcroce)]
+jcroce <- jcroce[1:(nrow(jcroce)-2),]
+jcroce$Total.Citations <- as.integer(gsub(",", "", jcroce$Total.Citations))
 
-jcroce = read.csv("data/jcr oceanography 2019.csv", na = "Not Available",
-                  skip = 1, header = T)
-noce<-dim(jcroce)[1]
-jcroce<-jcroce[1:(noce-2),]
 
-jcrpla = read.csv("data/jcr plant sciences 2019.csv", na = "Not Available",
-                  skip = 1, header = T)
-npla<-dim(jcrpla)[1]
-jcrpla<-jcrpla[1:(npla-2),]
+jcrpla <- read.table("data/jcr plant sciences 2020.csv", sep=",", 
+                     skip=2, fill=T, header=T, row.names=NULL,
+                     na.strings = "n/a")
+names(jcrpla)[-ncol(jcrpla)] <- names(jcrpla)[-1]
+jcrpla <- jcrpla[,-ncol(jcrpla)]
+jcrpla <- jcrpla[1:(nrow(jcrpla)-2),]
+jcrpla$Total.Citations <- as.integer(gsub(",", "", jcrpla$Total.Citations))
 
-jcrzoo = read.csv("data/jcr zoology 2019.csv", na = "Not Available",
-                  skip = 1, header = T)
-nzoo<-dim(jcrzoo)[1]
-jcrzoo<-jcrzoo[1:(nzoo-2),]
+
+jcrzoo <- read.table("data/jcr zoology 2020.csv", sep=",", 
+                     skip=2, fill=T, header=T, row.names=NULL,
+                     na.strings = "n/a")
+names(jcrzoo)[-ncol(jcrzoo)] <- names(jcrzoo)[-1]
+jcrzoo <- jcrzoo[,-ncol(jcrzoo)]
+jcrzoo <- jcrzoo[1:(nrow(jcrzoo)-2),]
+jcrzoo$Total.Citations <- as.integer(gsub(",", "", jcrzoo$Total.Citations))
+
 
 head(jcroce)
 tail(jcroce)
@@ -152,7 +188,7 @@ tail(jcrbio)
 dim(jcrbio)
 names(jcrbio)
 nrow(jcrbio)
-length(jcrbio$Full.Journal.Title)
+length(jcrbio$Journal.name)
 sum(nrow(jcreco), nrow(jcroce), nrow(jcrpla), nrow(jcrzoo))
 
 jcrbio$Category <- c(replicate(nrow(jcreco), "Ecology"), 
@@ -161,7 +197,7 @@ jcrbio$Category <- c(replicate(nrow(jcreco), "Ecology"),
                      replicate(nrow(jcrzoo), "Zoology"))
 
 jcrbio.med <- ddply(jcrbio, "Category", summarise, 
-                    IFmedian = median(Journal.Impact.Factor, na.rm = T))
+                    IFmedian = median(X2020.JIF, na.rm = T))
 jcrbio.med
 
 eco.med = round(jcrbio.med[1,2], digits = 2)
@@ -169,9 +205,9 @@ oce.med = round(jcrbio.med[2,2], digits = 2)
 pla.med = round(jcrbio.med[3,2], digits = 2)
 zoo.med = round(jcrbio.med[4,2], digits = 2)
 
-p2 <- ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
+p2 <- ggplot(jcrbio, aes(x=X2020.JIF, fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
-  xlab("Impact factor 2019: Biodiversidade Capes") + 
+  xlab("Impact factor 2020: Biodiversidade Capes") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,angle=0,
                                    hjust=.5,vjust=.5,face="plain"),
@@ -196,7 +232,7 @@ p2 <- ggplot(jcrbio, aes(x=Journal.Impact.Factor, fill=Category)) +
                 hjust = 0, vjust = 0), size = 3)
 
 p2
-png(filename= "figures/biodiversity 2019.png", 
+png(filename= "figures/biodiversity 2020.png", 
     res= 300,  height= 16,
     width=26, unit="cm")
 p2
