@@ -101,7 +101,7 @@ This is the distribution of impact factors of Ecology journals:
 ```{r, echo=FALSE, fig.height=7, fig.width=10, cache=FALSE, out.width='\\textwidth', fig.align='center'}
 p1 <- ggplot(jcreco, aes(x=X2021.JIF)) +
   geom_density(color = F, fill = "red", alpha = 0.3, position = "identity") +
-  xlab("Impact factor 2021: Ecology") + 
+  xlab("Impact factor 2022: Ecology") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,
                                    angle=0,hjust=.5,vjust=.5,face="plain"),
@@ -239,7 +239,7 @@ This is the distribution of impact factors of Biodiversity journals by disciplin
 ```{r, echo=FALSE, warning=FALSE, fig.height=7, cache=FALSE, fig.width=10, out.width='\\textwidth', fig.align='center'}
 p2 = ggplot(jcrbio, aes(x=X2021.JIF, fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
-  xlab("Impact factor 2021: CAPES's Biodiversity") + 
+  xlab("Impact factor 2022: CAPES's Biodiversity") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,angle=0,
                                    hjust=.5,vjust=.5,face="plain"),
