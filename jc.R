@@ -29,9 +29,9 @@ library(tidyverse)
 ################################################################################
 
 
-# Data import based on the JCR format used until 2020:
+# Data import based on the JCR format used until 2021:
 
-#jcreco = read.csv("data/jcr ecology 2020.csv", na = "Not Available",
+#jcreco = read.csv("data/jcr ecology 2021.csv", na = "Not Available",
 #skip = 1, header = T)
 #neco<-dim(jcreco)[1]
 #jcreco<-jcreco[1:(neco-2),]
@@ -43,7 +43,7 @@ library(tidyverse)
 # manually or using the updated methods below. I prefer Method 2.
 
 # Method 1
-#fl <- "data/jcr ecology 2020.csv"
+#fl <- "data/jcr ecology 2021.csv"
 #txt <- readLines(fl)
 #txt <- txt[-1]
 #txt <- sub(",$", "", txt)
@@ -54,9 +54,9 @@ library(tidyverse)
 
 # Method 2
 
-jcreco <- read.table("data/jcr ecology 2020.csv", sep=",", 
+jcreco <- read.table("data/jcr ecology 2021.csv", sep=",", 
                  skip=2, fill=T, header=T, row.names=NULL,
-                 na.strings = "n/a")
+                 na.strings = "N/A")
 names(jcreco)[-ncol(jcreco)] <- names(jcreco)[-1]
 jcreco <- jcreco[,-ncol(jcreco)]
 jcreco <- jcreco[1:(nrow(jcreco)-2),]
@@ -70,13 +70,13 @@ dim(jcreco)
 sum(is.na(jcreco))
 
 jcreco.med <- summarise(jcreco, 
-                        IFmedian = median(X2020.JIF, na.rm = T))
+                        IFmedian = median(X2021.JIF, na.rm = T))
 jcreco.med
 eco.med = round(jcreco.med[1,1], digits = 2)
 eco.med
 
 jcreco.qua1 <- summarise(jcreco, 
-                         IFqua1 = quantile(X2020.JIF, na.rm = T))
+                         IFqua1 = quantile(X2021.JIF, na.rm = T))
 class(jcreco.qua1)
 head(jcreco.qua1)
 str(jcreco.qua1)
@@ -84,16 +84,16 @@ eco.qua1 = round(jcreco.qua1[2,1], digits = 2)
 eco.qua1
 
 jcreco.qua2 <- summarise(jcreco, 
-                         IFqua2 = quantile(X2020.JIF, na.rm = T))
+                         IFqua2 = quantile(X2021.JIF, na.rm = T))
 class(jcreco.qua2)
 head(jcreco.qua2)
 str(jcreco.qua2)
 eco.qua2 = round(jcreco.qua2[4,1], digits = 2)
 eco.qua2
 
-p1 <- ggplot(jcreco, aes(x=X2020.JIF)) +
+p1 <- ggplot(jcreco, aes(x=X2021.JIF)) +
   geom_density(color = F, fill = "red", alpha = 0.3, position = "identity") +
-  xlab("Impact factor 2020: Ecology") + 
+  xlab("Impact factor 2021: Ecology") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,
                                    angle=0,hjust=.5,vjust=.5,face="plain"),
@@ -120,7 +120,7 @@ p1 <- ggplot(jcreco, aes(x=X2020.JIF)) +
                 hjust = -0.1, vjust = 0), size = 3, color = "red")
 
 p1
-png(filename= "figures/ecology 2020.png", 
+png(filename= "figures/ecology 2021.png", 
     res= 300,  height= 16, 
     width=26, unit="cm")
 p1
@@ -132,27 +132,27 @@ dev.off()
 ################################################################################
 
 
-jcroce <- read.table("data/jcr oceanography 2020.csv", sep=",", 
+jcroce <- read.table("data/jcr oceanography 2021.csv", sep=",", 
                      skip=2, fill=T, header=T, row.names=NULL,
-                     na.strings = "n/a")
+                     na.strings = "N/A")
 names(jcroce)[-ncol(jcroce)] <- names(jcroce)[-1]
 jcroce <- jcroce[,-ncol(jcroce)]
 jcroce <- jcroce[1:(nrow(jcroce)-2),]
 jcroce$Total.Citations <- as.integer(gsub(",", "", jcroce$Total.Citations))
 
 
-jcrpla <- read.table("data/jcr plant sciences 2020.csv", sep=",", 
+jcrpla <- read.table("data/jcr plant sciences 2021.csv", sep=",", 
                      skip=2, fill=T, header=T, row.names=NULL,
-                     na.strings = "n/a")
+                     na.strings = "N/A")
 names(jcrpla)[-ncol(jcrpla)] <- names(jcrpla)[-1]
 jcrpla <- jcrpla[,-ncol(jcrpla)]
 jcrpla <- jcrpla[1:(nrow(jcrpla)-2),]
 jcrpla$Total.Citations <- as.integer(gsub(",", "", jcrpla$Total.Citations))
 
 
-jcrzoo <- read.table("data/jcr zoology 2020.csv", sep=",", 
+jcrzoo <- read.table("data/jcr zoology 2021.csv", sep=",", 
                      skip=2, fill=T, header=T, row.names=NULL,
-                     na.strings = "n/a")
+                     na.strings = "N/A")
 names(jcrzoo)[-ncol(jcrzoo)] <- names(jcrzoo)[-1]
 jcrzoo <- jcrzoo[,-ncol(jcrzoo)]
 jcrzoo <- jcrzoo[1:(nrow(jcrzoo)-2),]
@@ -197,7 +197,7 @@ jcrbio$Category <- c(replicate(nrow(jcreco), "Ecology"),
                      replicate(nrow(jcrzoo), "Zoology"))
 
 jcrbio.med <- ddply(jcrbio, "Category", summarise, 
-                    IFmedian = median(X2020.JIF, na.rm = T))
+                    IFmedian = median(X2021.JIF, na.rm = T))
 jcrbio.med
 
 eco.med = round(jcrbio.med[1,2], digits = 2)
@@ -205,9 +205,9 @@ oce.med = round(jcrbio.med[2,2], digits = 2)
 pla.med = round(jcrbio.med[3,2], digits = 2)
 zoo.med = round(jcrbio.med[4,2], digits = 2)
 
-p2 <- ggplot(jcrbio, aes(x=X2020.JIF, fill=Category)) +
+p2 <- ggplot(jcrbio, aes(x=X2021.JIF, fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
-  xlab("Impact factor 2020: Biodiversidade Capes") + 
+  xlab("Impact factor 2021: Biodiversidade Capes") + 
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,angle=0,
                                    hjust=.5,vjust=.5,face="plain"),
@@ -232,7 +232,7 @@ p2 <- ggplot(jcrbio, aes(x=X2020.JIF, fill=Category)) +
                 hjust = 0, vjust = 0), size = 3)
 
 p2
-png(filename= "figures/biodiversity 2020.png", 
+png(filename= "figures/biodiversity 2021.png", 
     res= 300,  height= 16,
     width=26, unit="cm")
 p2
