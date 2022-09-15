@@ -1,5 +1,5 @@
 ---
-title: "Impact Factor"
+title: "Impact Factor `r format(Sys.time(), '%Y')`"
 author: "Marco Mello"
 date: "`r format(Sys.time(), '%Y/%b/%d')`"
 output:
@@ -16,7 +16,7 @@ prettyNum(x, big.mark=",")
 })
 ```
 
-Impact factor analysis of journals classified in the categories "Ecology" (JCR) and "Biodiversity" (CAPES).
+Impact factor analysis of journals classified in the categories "Ecology" (JCR) and "Biodiversity" (CAPES), using recently published data from last year, extracted from Journal Citation Reports ([JCR](https://jcr.clarivate.com)).
 
 [Ecological Synthesis Lab](https://marcomellolab.wordpress.com) (SintECO).
 
@@ -52,7 +52,7 @@ library(tidyverse)
 
 ## 1. Ecology{#ecology}
 
-Let's examine the impact factor data of the journals classified in the category "Ecology" on Journal Citation Reports (JCR).
+Let's examine the impact factor of the journals classified in the category "Ecology" on JCR.
 
 ```{r, echo=FALSE, include=FALSE}
 jcreco <- read.table("data/jcr ecology 2021.csv", sep=",", 
@@ -96,7 +96,7 @@ eco.max = round(jcreco.max[1,1], digits = 2)
 The median impact factor of Ecology journals is `r format(eco.med, scientific=FALSE)`. Fifty-percent of the journals vary between `r format(eco.qua1, scientific=FALSE)` and `r format(eco.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(eco.min, scientific=FALSE)` and the maximum is `r format(eco.max, scientific=FALSE)`.
 
 
-This is the distribution of impact factors of Ecology journals:
+This is the distribution of impact factor for Ecology journals:
 
 ```{r, echo=FALSE, fig.height=7, fig.width=10, cache=FALSE, out.width='\\textwidth', fig.align='center'}
 p1 <- ggplot(jcreco, aes(x=X2021.JIF)) +
@@ -137,7 +137,7 @@ p1
 str(jcreco)
 ```
 
-The journals classified in the categories "Ecology", "Oceanography", "Plant Sciences", and "Zoology" on Journal Citation Reports (JCR) compose the category "Biodiversity" used by the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES).
+The journals classified in the categories "Ecology", "Oceanography", "Plant Sciences", and "Zoology" on Journal Citation Reports (JCR) are pooled in the category "Biodiversity", used by the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES).
 
 ```{r, echo=FALSE, include=FALSE}
 jcroce <- read.table("data/jcr oceanography 2021.csv", sep=",", 
@@ -234,7 +234,7 @@ These are the median impact factors by category:
 4. Zoology = `r format(zoo.med, scientific=FALSE)`
 
 
-This is the distribution of impact factors of Biodiversity journals by discipline:
+This is the distribution of impact factor for Biodiversity journals by category:
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=7, cache=FALSE, fig.width=10, out.width='\\textwidth', fig.align='center'}
 p2 = ggplot(jcrbio, aes(x=X2021.JIF, fill=Category)) +
