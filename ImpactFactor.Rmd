@@ -31,7 +31,7 @@ See [README](https://github.com/marmello77/ImpactFactor/blob/master/README.md) f
 
 
 ```{r, echo=FALSE, include=FALSE}
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 ```
 
@@ -98,7 +98,7 @@ The median impact factor of Ecology journals is `r format(eco.med, scientific=FA
 
 This is the distribution of impact factor for Ecology journals:
 
-```{r, echo=FALSE, fig.height=7, fig.width=10, cache=FALSE, out.width='\\textwidth', fig.align='center'}
+```{r, echo=FALSE, warning=FALSE, fig.height=7, fig.width=10, cache=FALSE, out.width='\\textwidth', fig.align='center'}
 p1 <- ggplot(jcreco, aes(x=X2021.JIF)) +
   geom_density(color = F, fill = "red", alpha = 0.3, position = "identity") +
   xlab("Impact factor 2022: Ecology") + 
