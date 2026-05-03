@@ -62,6 +62,11 @@ jcreco <- jcreco[,-ncol(jcreco)]
 jcreco <- jcreco[1:(nrow(jcreco)-2),]
 jcreco$Total.Citations <- as.integer(gsub(",", "", jcreco$Total.Citations))
 
+# Since 2024, JCR uses "<0.1" for very low JIF values instead of a number.
+# This causes the entire column to be imported as character, breaking quantile().
+# The line below converts the column to numeric, turning "<0.1" into NA.
+jcreco$X2024.JIF <- suppressWarnings(as.numeric(jcreco$X2024.JIF))
+
 head(jcreco)
 tail(jcreco)
 colnames(jcreco)
@@ -76,19 +81,19 @@ eco.med = round(jcreco.med[1,1], digits = 2)
 eco.med
 
 jcreco.qua1 <- summarise(jcreco, 
-                         IFqua1 = quantile(X2024.JIF, na.rm = T))
+                         IFqua1 = quantile(X2024.JIF, probs = 0.25, na.rm = T))
 class(jcreco.qua1)
 head(jcreco.qua1)
 str(jcreco.qua1)
-eco.qua1 = round(jcreco.qua1[2,1], digits = 2)
+eco.qua1 = round(jcreco.qua1[1,1], digits = 2)
 eco.qua1
 
 jcreco.qua2 <- summarise(jcreco, 
-                         IFqua2 = quantile(X2024.JIF, na.rm = T))
+                         IFqua2 = quantile(X2024.JIF, probs = 0.75, na.rm = T))
 class(jcreco.qua2)
 head(jcreco.qua2)
 str(jcreco.qua2)
-eco.qua2 = round(jcreco.qua2[4,1], digits = 2)
+eco.qua2 = round(jcreco.qua2[1,1], digits = 2)
 eco.qua2
 
 p1 <- ggplot(jcreco, aes(x=X2024.JIF)) +
@@ -139,6 +144,7 @@ names(jcroce)[-ncol(jcroce)] <- names(jcroce)[-1]
 jcroce <- jcroce[,-ncol(jcroce)]
 jcroce <- jcroce[1:(nrow(jcroce)-2),]
 jcroce$Total.Citations <- as.integer(gsub(",", "", jcroce$Total.Citations))
+jcroce$X2024.JIF <- suppressWarnings(as.numeric(jcroce$X2024.JIF))
 
 
 jcrpla <- read.table("data/jcr plant sciences 2024.csv", sep=",", 
@@ -148,6 +154,7 @@ names(jcrpla)[-ncol(jcrpla)] <- names(jcrpla)[-1]
 jcrpla <- jcrpla[,-ncol(jcrpla)]
 jcrpla <- jcrpla[1:(nrow(jcrpla)-2),]
 jcrpla$Total.Citations <- as.integer(gsub(",", "", jcrpla$Total.Citations))
+jcrpla$X2024.JIF <- suppressWarnings(as.numeric(jcrpla$X2024.JIF))
 
 
 jcrzoo <- read.table("data/jcr zoology 2024.csv", sep=",", 
@@ -157,6 +164,7 @@ names(jcrzoo)[-ncol(jcrzoo)] <- names(jcrzoo)[-1]
 jcrzoo <- jcrzoo[,-ncol(jcrzoo)]
 jcrzoo <- jcrzoo[1:(nrow(jcrzoo)-2),]
 jcrzoo$Total.Citations <- as.integer(gsub(",", "", jcrzoo$Total.Citations))
+jcrzoo$X2024.JIF <- suppressWarnings(as.numeric(jcrzoo$X2024.JIF))
 
 
 head(jcroce)
@@ -237,6 +245,10 @@ png(filename= "figures/biodiversity 2024.png",
     width=26, unit="cm")
 p2
 dev.off()
+
+
+# Save workspace so ImpactFactor.Rmd can load pre-processed objects directly
+save.image(file = "data/workspace.RData")
 
 
 ################################### END ########################################

@@ -22,23 +22,16 @@ Impact factor analysis of journals classified in the categories "Ecology" (JCR) 
 
 See [README](https://github.com/marmello77/ImpactFactor/blob/master/README.md) for further info.
 
-
 ## Summary
 
-1. [Ecology](#ecology)
+1.  [Ecology](#ecology)
 
-2. [Biodiversity](#biodiversity)
-
-
-```{r, echo=FALSE, include=FALSE}
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-
-```
+2.  [Biodiversity](#biodiversity)
 
 ```{r, echo=FALSE, include=FALSE}
-rm(list= ls())
+# Load the workspace saved by jc.R. Run jc.R first to update the data.
+load("data/workspace.RData")
 ```
-
 
 ```{r, echo=FALSE, include=FALSE}
 library(ggplot2)
@@ -48,60 +41,50 @@ library(reshape2)
 library(tidyverse)
 ```
 
-
-
-## 1. Ecology{#ecology}
-
-Let's examine the impact factor of the journals classified in the category "Ecology" on JCR.
-
 ```{r, echo=FALSE, include=FALSE}
-jcreco <- read.table("data/jcr ecology 2022.csv", sep=",", 
-                 skip=2, fill=T, header=T, row.names=NULL,
-                 na.strings = "N/A")
-names(jcreco)[-ncol(jcreco)] <- names(jcreco)[-1]
-jcreco <- jcreco[,-ncol(jcreco)]
-jcreco <- jcreco[1:(nrow(jcreco)-2),]
-jcreco$Total.Citations <- as.integer(gsub(",", "", jcreco$Total.Citations))
+# Detect the JIF column name dynamically (e.g. X2024.JIF)
+jif_col <- grep("^X[0-9]{4}\\.JIF$", names(jcreco), value = TRUE)
+year_label <- sub("^X([0-9]{4})\\.JIF$", "\\1", jif_col)
 ```
 
+## 1. Ecology {#ecology}
+
+Let's examine the impact factor of the journals classified in the category "Ecology" on JCR.
 
 ```{r, echo=FALSE, include=FALSE}
 str(jcreco)
 ```
 
-
 ```{r, echo=FALSE, include=FALSE}
-jcreco.med <- summarise(jcreco, 
-                        IFmedian = median(X2022.JIF, na.rm = T))
+jcreco.med <- summarise(jcreco,
+                        IFmedian = median(.data[[jif_col]], na.rm = T))
 eco.med = round(jcreco.med[1,1], digits = 2)
 
-jcreco.qua1 <- summarise(jcreco, 
-                         IFqua1 = quantile(X2022.JIF, na.rm = T))
-eco.qua1 = round(jcreco.qua1[2,1], digits = 2)
+jcreco.qua1 <- summarise(jcreco,
+                         IFqua1 = quantile(.data[[jif_col]], probs = 0.25, na.rm = T))
+eco.qua1 = round(jcreco.qua1[1,1], digits = 2)
 
-jcreco.qua2 <- summarise(jcreco, 
-                         IFqua2 = quantile(X2022.JIF, na.rm = T))
-eco.qua2 = round(jcreco.qua2[4,1], digits = 2)
+jcreco.qua2 <- summarise(jcreco,
+                         IFqua2 = quantile(.data[[jif_col]], probs = 0.75, na.rm = T))
+eco.qua2 = round(jcreco.qua2[1,1], digits = 2)
 
-jcreco.min <- summarise(jcreco, 
-                        IFmin = min(X2022.JIF, na.rm = T))
+jcreco.min <- summarise(jcreco,
+                        IFmin = min(.data[[jif_col]], na.rm = T))
 eco.min = round(jcreco.min[1,1], digits = 2)
 
-jcreco.max <- summarise(jcreco, 
-                        IFmax = max(X2022.JIF, na.rm = T))
+jcreco.max <- summarise(jcreco,
+                        IFmax = max(.data[[jif_col]], na.rm = T))
 eco.max = round(jcreco.max[1,1], digits = 2)
-
 ```
 
 The median impact factor of Ecology journals is `r format(eco.med, scientific=FALSE)`. Fifty-percent of the journals vary between `r format(eco.qua1, scientific=FALSE)` and `r format(eco.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(eco.min, scientific=FALSE)` and the maximum is `r format(eco.max, scientific=FALSE)`.
 
-
 This is the distribution of impact factor for Ecology journals:
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=7, fig.width=10, cache=FALSE, out.width='\\textwidth', fig.align='center'}
-p1 <- ggplot(jcreco, aes(x=X2022.JIF)) +
+p1 <- ggplot(jcreco, aes(x=.data[[jif_col]])) +
   geom_density(color = F, fill = "red", alpha = 0.3, position = "identity") +
-  xlab("Impact factor 2022: Ecology") + 
+  xlab(paste("Impact factor", year_label, ": Ecology")) +
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,
                                    angle=0,hjust=.5,vjust=.5,face="plain"),
@@ -116,11 +99,11 @@ p1 <- ggplot(jcreco, aes(x=X2022.JIF)) +
         axis.title.x=element_text(margin=margin(20,0,0,0))) +
   geom_vline(data=jcreco.med, aes(xintercept=eco.med),
              linetype="dashed", size=0.5, color = "red") +
-  geom_text(aes(eco.med, 0.29, label = eco.med, angle = 0, 
+  geom_text(aes(eco.med, 0.29, label = eco.med, angle = 0,
                 hjust = -0.1, vjust = 0), size = 5, color = "red") +
   geom_vline(data=jcreco.qua1, aes(xintercept=eco.qua1),
              linetype="dashed", size=0.5, color = "red") +
-  geom_text(aes(eco.qua1, 0.29, label = eco.qua1, angle = 0, 
+  geom_text(aes(eco.qua1, 0.29, label = eco.qua1, angle = 0,
                 hjust = -0.1, vjust = 0), size = 3, color = "red") +
   geom_vline(data=jcreco.qua1, aes(xintercept=eco.qua2),
              linetype="dashed", size=0.5, color = "red") +
@@ -130,90 +113,40 @@ p1 <- ggplot(jcreco, aes(x=X2022.JIF)) +
 p1
 ```
 
-
-## 2. Biodiversity{#biodiversity}
-
-```{r, echo=FALSE, include=FALSE}
-str(jcreco)
-```
-
-The journals classified in the categories "Ecology", "Oceanography", "Plant Sciences", and "Zoology" on Journal Citation Reports (JCR) are pooled in the category "Biodiversity", used by the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES).
-
-```{r, echo=FALSE, include=FALSE}
-jcroce <- read.table("data/jcr oceanography 2022.csv", sep=",", 
-                     skip=2, fill=T, header=T, row.names=NULL,
-                     na.strings = "N/A")
-names(jcroce)[-ncol(jcroce)] <- names(jcroce)[-1]
-jcroce <- jcroce[,-ncol(jcroce)]
-jcroce <- jcroce[1:(nrow(jcroce)-2),]
-jcroce$Total.Citations <- as.integer(gsub(",", "", jcroce$Total.Citations))
-
-
-jcrpla <- read.table("data/jcr plant sciences 2022.csv", sep=",", 
-                     skip=2, fill=T, header=T, row.names=NULL,
-                     na.strings = "N/A")
-names(jcrpla)[-ncol(jcrpla)] <- names(jcrpla)[-1]
-jcrpla <- jcrpla[,-ncol(jcrpla)]
-jcrpla <- jcrpla[1:(nrow(jcrpla)-2),]
-jcrpla$Total.Citations <- as.integer(gsub(",", "", jcrpla$Total.Citations))
-
-
-jcrzoo <- read.table("data/jcr zoology 2022.csv", sep=",", 
-                     skip=2, fill=T, header=T, row.names=NULL,
-                     na.strings = "N/A")
-names(jcrzoo)[-ncol(jcrzoo)] <- names(jcrzoo)[-1]
-jcrzoo <- jcrzoo[,-ncol(jcrzoo)]
-jcrzoo <- jcrzoo[1:(nrow(jcrzoo)-2),]
-jcrzoo$Total.Citations <- as.integer(gsub(",", "", jcrzoo$Total.Citations))
-```
-
-
-```{r, echo=FALSE, include=FALSE}
-jcrbio <- rbind(jcreco, jcroce[1:nrow(jcroce),], 
-                jcrpla[1:nrow(jcrpla),], jcrzoo[1:nrow(jcrzoo),])
-```
-
+## 2. Biodiversity {#biodiversity}
 
 ```{r, echo=FALSE, include=FALSE}
 str(jcrbio)
 ```
 
+The journals classified in the categories "Ecology", "Oceanography", "Plant Sciences", and "Zoology" on Journal Citation Reports (JCR) are pooled in the category "Biodiversity", used by the Brazilian Coordination for the Improvement of Higher Education Personnel (CAPES).
 
 ```{r, echo=FALSE, include=FALSE}
-jcrbio$Category <- c(replicate(nrow(jcreco), "Ecology"), 
-                     replicate(nrow(jcroce), "Oceanography"), 
-                     replicate(nrow(jcrpla), "PlantScience"), 
-                     replicate(nrow(jcrzoo), "Zoology"))
-```
-
-
-```{r, echo=FALSE, include=FALSE}
-jcrbio.med <- ddply(jcrbio, "Category", summarise, 
-                    IFmedian = median(X2022.JIF, na.rm = T))
-bio.med <- summarise(jcrbio, 
-                        IFmedian = median(X2022.JIF, na.rm = T))
+bio.med <- summarise(jcrbio,
+                     IFmedian = median(.data[[jif_col]], na.rm = T))
 bio.med = round(bio.med, digits = 2)
 
-jcrbio.qua1 <- summarise(jcrbio, 
-                         IFqua1 = quantile(X2022.JIF, na.rm = T))
-bio.qua1 = round(jcrbio.qua1[2,1], digits = 2)
+jcrbio.qua1 <- summarise(jcrbio,
+                         IFqua1 = quantile(.data[[jif_col]], probs = 0.25, na.rm = T))
+bio.qua1 = round(jcrbio.qua1[1,1], digits = 2)
 
-jcrbio.qua2 <- summarise(jcrbio, 
-                         IFqua2 = quantile(X2022.JIF, na.rm = T))
-bio.qua2 = round(jcrbio.qua2[4,1], digits = 2)
+jcrbio.qua2 <- summarise(jcrbio,
+                         IFqua2 = quantile(.data[[jif_col]], probs = 0.75, na.rm = T))
+bio.qua2 = round(jcrbio.qua2[1,1], digits = 2)
 
-jcrbio.min <- summarise(jcrbio, 
-                        IFmin = min(X2022.JIF, na.rm = T))
+jcrbio.min <- summarise(jcrbio,
+                        IFmin = min(.data[[jif_col]], na.rm = T))
 bio.min = round(jcrbio.min[1,1], digits = 2)
 
-jcrbio.max <- summarise(jcrbio, 
-                        IFmax = max(X2022.JIF, na.rm = T))
+jcrbio.max <- summarise(jcrbio,
+                        IFmax = max(.data[[jif_col]], na.rm = T))
 bio.max = round(jcrbio.max[1,1], digits = 2)
+
+jcrbio.med <- ddply(jcrbio, "Category", summarise,
+                    IFmedian = median(.data[[jif_col]], na.rm = T))
 ```
 
-
 The median impact factor of Biodiversity journals is `r format(bio.med[1,1], scientific=FALSE)`. Fifty-percent of the journals vary between `r format(bio.qua1, scientific=FALSE)` and `r format(bio.qua2, scientific=FALSE)`. The minimum impact factor recorded is `r format(bio.min, scientific=FALSE)` and the maximum is `r format(bio.max, scientific=FALSE)`.
-
 
 ```{r, echo=FALSE, include=FALSE}
 eco.med = round(jcrbio.med[1,2], digits = 2)
@@ -222,24 +155,22 @@ pla.med = round(jcrbio.med[3,2], digits = 2)
 zoo.med = round(jcrbio.med[4,2], digits = 2)
 ```
 
-
 These are the median impact factors by category:
 
-1. Ecology = `r format(eco.med, scientific=FALSE)`
+1.  Ecology = `r format(eco.med, scientific=FALSE)`
 
-2. Oceanography = `r format(oce.med, scientific=FALSE)`
+2.  Oceanography = `r format(oce.med, scientific=FALSE)`
 
-3. Plant Sciences = `r format(pla.med, scientific=FALSE)`
+3.  Plant Sciences = `r format(pla.med, scientific=FALSE)`
 
-4. Zoology = `r format(zoo.med, scientific=FALSE)`
-
+4.  Zoology = `r format(zoo.med, scientific=FALSE)`
 
 This is the distribution of impact factor for Biodiversity journals by category:
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=7, cache=FALSE, fig.width=10, out.width='\\textwidth', fig.align='center'}
-p2 = ggplot(jcrbio, aes(x=X2022.JIF, fill=Category)) +
+p2 = ggplot(jcrbio, aes(x=.data[[jif_col]], fill=Category)) +
   geom_density(alpha=.3, position="identity", color = F) +
-  xlab("Impact factor 2022: CAPES's Biodiversity") + 
+  xlab(paste("Impact factor", year_label, ": CAPES's Biodiversity")) +
   ylab("Frequency") +
   theme(axis.text.x = element_text(colour="grey20",size=20,angle=0,
                                    hjust=.5,vjust=.5,face="plain"),
@@ -252,17 +183,16 @@ p2 = ggplot(jcrbio, aes(x=X2022.JIF, fill=Category)) +
   theme(plot.margin = unit(c(0.5,0.5,0.5,0.5),"cm")) +
   theme(axis.title.y=element_text(margin=margin(0,20,0,0)),
         axis.title.x=element_text(margin=margin(20,0,0,0))) +
-  geom_vline(data=jcrbio.med, aes(xintercept=IFmedian,  colour=Category),
+  geom_vline(data=jcrbio.med, aes(xintercept=IFmedian, colour=Category),
              linetype="dashed", size=0.5) +
-  geom_text(aes(eco.med, 0.60, label = eco.med, angle = 0, 
+  geom_text(aes(eco.med, 0.60, label = eco.med, angle = 0,
                 hjust = 0, vjust = 0), size = 3) +
-  geom_text(aes(oce.med, 0.62, label = oce.med, angle = 0, 
+  geom_text(aes(oce.med, 0.62, label = oce.med, angle = 0,
                 hjust = 0, vjust = 0), size = 3) +
-  geom_text(aes(pla.med, 0.64, label = pla.med, angle = 0, 
+  geom_text(aes(pla.med, 0.64, label = pla.med, angle = 0,
                 hjust = 0, vjust = 0), size = 3) +
-  geom_text(aes(zoo.med, 0.66, label = zoo.med, angle = 0, 
+  geom_text(aes(zoo.med, 0.66, label = zoo.med, angle = 0,
                 hjust = 0, vjust = 0), size = 3)
 
 p2
 ```
-
