@@ -10,6 +10,8 @@ E-mail: [marmello\@usp.br](mailto:marmello@usp.br){.email}.
 
 First published on September 24th, 2020 (English version).
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20008630.svg)](https://doi.org/10.5281/zenodo.20008630)
+
 Run in R version 4.6.0 (2026-04-24) -- "Because it was There".
 
 **Important:** Before knitting `ImpactFactor.Rmd`, always run `jc.R` first so that the workspace file `data/workspace.RData` is updated with the latest data.
