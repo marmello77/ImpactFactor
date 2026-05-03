@@ -1,11 +1,11 @@
 ---
-title: "Impact Factor `r format(Sys.time(), '%Y')`"
+title: "Impact Factor `r local({ load('data/workspace.RData'); sub('^X([0-9]{4})\\.JIF$', '\\1', grep('^X[0-9]{4}\\.JIF$', names(jcreco), value=TRUE)) })`"
 author: "Marco Mello"
 date: "`r format(Sys.time(), '%Y/%b/%d')`"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +14,19 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::knit_hooks$set(inline = function(x) {
 prettyNum(x, big.mark=",")
 })
+
+# Load the workspace saved by jc.R. Run jc.R first to update the data.
+load("data/workspace.RData")
+
+library(ggplot2)
+library(plyr)
+library(RColorBrewer)
+library(reshape2)
+library(tidyverse)
+
+# Detect the JIF column name dynamically (e.g. X2024.JIF)
+jif_col <- grep("^X[0-9]{4}\\.JIF$", names(jcreco), value = TRUE)
+year_label <- sub("^X([0-9]{4})\\.JIF$", "\\1", jif_col)
 ```
 
 Impact factor analysis of journals classified in the categories "Ecology" (JCR) and "Biodiversity" (CAPES), using recently published data from last year, extracted from Journal Citation Reports ([JCR](https://jcr.clarivate.com)).
@@ -27,25 +40,6 @@ See [README](https://github.com/marmello77/ImpactFactor/blob/master/README.md) f
 1.  [Ecology](#ecology)
 
 2.  [Biodiversity](#biodiversity)
-
-```{r, echo=FALSE, include=FALSE}
-# Load the workspace saved by jc.R. Run jc.R first to update the data.
-load("data/workspace.RData")
-```
-
-```{r, echo=FALSE, include=FALSE}
-library(ggplot2)
-library(plyr)
-library(RColorBrewer)
-library(reshape2)
-library(tidyverse)
-```
-
-```{r, echo=FALSE, include=FALSE}
-# Detect the JIF column name dynamically (e.g. X2024.JIF)
-jif_col <- grep("^X[0-9]{4}\\.JIF$", names(jcreco), value = TRUE)
-year_label <- sub("^X([0-9]{4})\\.JIF$", "\\1", jif_col)
-```
 
 ## 1. Ecology {#ecology}
 

@@ -10,9 +10,9 @@ E-mail: [marmello\@usp.br](mailto:marmello@usp.br){.email}.
 
 First published on September 24th, 2020 (English version).
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4106803.svg)](https://doi.org/10.5281/zenodo.4106803)
+Run in R version 4.6.0 (2026-04-24) -- "Because it was There".
 
-Run in R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out".
+**Important:** Before knitting `ImpactFactor.Rmd`, always run `jc.R` first so that the workspace file `data/workspace.RData` is updated with the latest data.
 
 Disclaimer: You may freely use the software provided here for any purposes at your own risk. We assume no responsibility or liability for the use of this software, convey no license or title under any patent, copyright, or mask work right to the product. We reserve the right to make changes in the software without notification. We also make no representation or warranty that such application will be suitable for the specified use without further testing or modification. If this software helps you produce any academic work (paper, book, chapter, monograph, dissertation, report, talk, keynote, lecture or similar), please acknowledge the authors and cite the source.
 
@@ -38,6 +38,8 @@ The Brazilian Coordination for the Improvement of Higher Education Personnel (CA
 
     d.  jcr zoology [year].csv -\> raw bibliometric data from journals classified in JCR's category Zoology in the respective year (2018, 2019 etc.).
 
+    e.  workspace.RData -\> R workspace saved automatically by `jc.R` at the end of each run. Loaded by `ImpactFactor.Rmd` to ensure the report always reflects the most recently analyzed data.
+
 2.  figures (folder)
 
     a.  biodiversity [year].png -\> plot with the distribution of impact factors in CAPES's category Biodiversity in the respective year (2018, 2019 etc.).
@@ -50,9 +52,17 @@ The Brazilian Coordination for the Improvement of Higher Education Personnel (CA
 
 5.  ImpactFactor.pdf -\> summary of the results in PDF format.
 
+6.  ImpactFactor.html -\> summary of the results in HTML format.
+
 ## Instructions
 
-Follow the instructions provided in the script "jc.R". Alternatively, follow the tutorial provided in "ImpactFactor.Rmd".
+1.  Download the CSV files for the desired year from [Journal Citation Reports](https://jcr.clarivate.com) and place them in the `data/` folder, following the naming convention `jcr [category] [year].csv` (e.g., `jcr ecology 2024.csv`).
+
+2.  Update the file names referenced in `jc.R` to match the new CSVs.
+
+3.  Run `jc.R`. The script will process the data, generate the figures in the `figures/` folder, and save the workspace to `data/workspace.RData`.
+
+4.  Knit `ImpactFactor.Rmd` to HTML or PDF. The report loads `data/workspace.RData` directly, so it always reflects the data analyzed in the previous step — including the correct year in the title.
 
 ## Feedback
 
